@@ -2,6 +2,8 @@
 
 module ProblemDetails
   module Rails
+    require 'problem_details'
     require_relative 'rails/config'
+    require_relative 'rails/railtie' if defined?(::Rails)
   end
 end
