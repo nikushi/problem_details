@@ -1,5 +1,6 @@
 require "bundler/setup"
 require "problem_details"
+require "problem_details/rails"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
