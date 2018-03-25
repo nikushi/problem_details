@@ -12,7 +12,7 @@ module ProblemDetails
 
       # @return [Hash] build a hash being passed to render method.
       def build
-        content_type = @options.delete(:content_type) || 'application/problem+json'
+        content_type = @options.delete(:content_type) || ProblemDetails.lookup_content_type(:json)
         status = @options.delete(:status) || :ok
         document = ProblemDetails::Document.new(status: status, **@content)
         { json: document.to_h, status: status, content_type: content_type, **@options }
