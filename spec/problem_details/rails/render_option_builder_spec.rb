@@ -10,12 +10,12 @@ RSpec.describe ProblemDetails::Rails::RenderOptionBuilder do
     context 'example 1 in RFC' do
       let(:content) do
         {
-          type: "https://example.com/probs/out-of-credit",
-          title: "You do not have enough credit.",
-          detail: "Your current balance is 30, but that costs 50.",
-          instance: "/account/12345/msgs/abc",
+          type: 'https://example.com/probs/out-of-credit',
+          title: 'You do not have enough credit.',
+          detail: 'Your current balance is 30, but that costs 50.',
+          instance: '/account/12345/msgs/abc',
           balance: 30,
-          accounts: ["/account/12345", "/account/67890"],
+          accounts: ['/account/12345', '/account/67890'],
         }
       end
       let(:options) do
@@ -26,13 +26,13 @@ RSpec.describe ProblemDetails::Rails::RenderOptionBuilder do
       let(:expected) do
         {
           json: {
-            type: "https://example.com/probs/out-of-credit",
-            title: "You do not have enough credit.",
+            type: 'https://example.com/probs/out-of-credit',
+            title: 'You do not have enough credit.',
             status: 403,
-            detail: "Your current balance is 30, but that costs 50.",
-            instance: "/account/12345/msgs/abc",
+            detail: 'Your current balance is 30, but that costs 50.',
+            instance: '/account/12345/msgs/abc',
             balance: 30,
-            accounts: ["/account/12345", "/account/67890"],
+            accounts: ['/account/12345', '/account/67890'],
           },
           status: 403,
           content_type: 'application/problem+json',

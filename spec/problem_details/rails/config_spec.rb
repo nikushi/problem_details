@@ -3,7 +3,6 @@
 require 'spec_helper'
 
 RSpec.describe ProblemDetails::Rails::Config do
-
   describe 'default_json_content_type' do
     subject { ProblemDetails::Rails.config.default_json_content_type }
 

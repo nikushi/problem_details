@@ -1,5 +1,5 @@
-require "problem_details/version"
-require "problem_details/document"
+require 'problem_details/version'
+require 'problem_details/document'
 
 module ProblemDetails
 end

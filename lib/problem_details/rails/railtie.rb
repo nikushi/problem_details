@@ -2,7 +2,7 @@
 
 module ProblemDetails
   class Railtie < ::Rails::Railtie
-    initializer 'problem_details.initialize' do |app|
+    initializer 'problem_details.initialize' do |_app|
       ActiveSupport.on_load(:action_controller) do
         require 'problem_details'
         require 'problem_details/rails/render_option_builder'

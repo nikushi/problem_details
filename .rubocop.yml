@@ -1,0 +1,6 @@
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 120
+  Severity: refactor
