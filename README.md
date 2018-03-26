@@ -1,8 +1,18 @@
 # ProblemDetails [![Build Status](https://travis-ci.org/nikushi/problem_details.svg?branch=master)](https://travis-ci.org/nikushi/problem_details)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/problem_details`. To experiment with that code, run `bin/console` for an interactive prompt.
+ProblemDetails is an implementation of [RFC7807 Problem Details for HTTP APIs](https://tools.ietf.org/html/rfc7807).
 
-TODO: Delete this and the text above, and describe your gem
+The RFC defines a "problem detail" as a way to inform errors to clients as machine readable form in a HTTP response
+to avoid the need to define new error response formats for HTTP APIs.
+
+This library also works with Rails, by the `problem` renderer that helps to respond with the problem detail form.
+
+Currently only JSON serialization is supported.
+
+## Features
+
+* Provides the class that implements a Problem Details JSON Object.
+* With Rails, automatically adds the renderer to respond with `Content-Type: application/problem+json` which works with `render` in controllers.
 
 ## Installation
 
@@ -12,17 +22,123 @@ Add this line to your application's Gemfile:
 gem 'problem_details'
 ```
 
+Or if you use with Rails, add below line instead.
+
+```ruby
+gem 'problem_details-rails'
+```
+
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install problem_details
-
 ## Usage
 
-TODO: Write usage instructions here
+### Build a problem
+
+```ruby
+require 'problem_details'
+
+ProblemDetails::Document.new(status: 404).to_json
+```
+
+will produce:
+
+```json
+{
+  "type": "about:blank",
+  "title": "Not Found",
+  "status": 404
+}
+```
+
+As above, the value of `type` will be presented as `about:blank` by default if the value is ommited, also the value of `title` is filled automatically from the status code. These are described in [Predefined Problem Types](https://tools.ietf.org/html/rfc7807#section-4.2):
+
+> The "about:blank" URI, when used as a problem type, indicates that the problem has no additional semantics beyond that of the HTTP status code.
+
+> When "about:blank" is used, the title SHOULD be the same as the recommended HTTP status phrase for that code (e.g., "Not Found" for 404, and so on)
+
+But you may also have the need to add some little hint, e.g. as a custom detail of the problem:
+
+```ruby
+ProblemDetails::Document.new(status: 503, detail: 'Database not reachable').to_json
+```
+
+will produce:
+
+```json
+{
+  "type": "about:blank",
+  "title": "Service Unavailable",
+  "status": 503,
+  "detail": "Database not reachable"
+}
+```
+
+You can build a problem with any additional members which are described as [extension members](https://tools.ietf.org/html/rfc7807#section-3.2).
+
+```ruby
+ProblemDetails::Document.new(
+  status: :forbidden,
+  type: 'https://example.com/probs/out-of-credit',
+  balance: 30,
+  accounts: ['/account/12345', '/account/67890'],
+).to_json
+```
+
+will produce(note that `balance` and `accounts` are extention members):
+
+```json
+{
+  "type": "https://example.com/probs/out-of-credit",
+  "title": "Forbidden",
+  "status": 403,
+  "balance": 30,
+  "accounts": [
+    "/account/12345",
+    "/account/67890"
+  ]
+}
+```
+
+### With Rails
+
+Once `render_problems-rails` gem is installed into a Rails system, a problem can be rendered with the problem detail form with `Content-Type: application/problem+json`.
+
+For example, respond with validation error messages:
+
+```ruby
+# app/controllers/api/posts_controller.rb
+class Api::PostsController < ApplicationController
+  def create
+    @post = Post.new(params[:post])
+    if @post.save
+      render json: @post
+    else
+      render problem: { errors: @post.errors }, status: :unprocessable_entity
+    end
+  end
+end
+```
+
+With `render problem: { ... }`, generated HTTP response will be like:
+
+```
+HTTP/1.1 422 Unprocessable Entity
+Content-Type: application/problem+json; charset=utf-8
+
+{
+  "type": "about:blank",
+  "title": "Unprocessable Entity",
+  "status": 422,
+  "errors": {
+    "body": [
+      "can't be blank"
+    ]
+  }
+}
+```
+
 
 ## Development
 
@@ -32,7 +148,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/problem_details.
+Bug reports and pull requests are welcome on GitHub at https://github.com/nikushi/problem_details.
 
 ## License
 
