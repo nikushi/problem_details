@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Nobuhiro Nikushi']
   spec.email         = ['deneb.ge@gmail.com']
 
-  spec.summary       = 'RFC 7807 Problem Details'
-  spec.description   = 'An error object implementation representing RFC 7807 Problem Details'
+  spec.summary       = 'An implementation of RFC 7807 Problem Details for HTTP APIs'
+  spec.description   = spec.summary
   spec.homepage      = 'https://github.com/nikushi/problem_details'
   spec.license       = 'MIT'
 
