@@ -1,4 +1,4 @@
-# ProblemDetails [![Build Status](https://travis-ci.org/nikushi/problem_details.svg?branch=master)](https://travis-ci.org/nikushi/problem_details)
+# ProblemDetails [![Build Status](https://travis-ci.org/nikushi/problem_details.svg?branch=master)](https://travis-ci.org/nikushi/problem_details) [![Gem Version](https://badge.fury.io/rb/problem_details.svg)](https://badge.fury.io/rb/problem_details)
 
 ProblemDetails is an implementation of [RFC7807 Problem Details for HTTP APIs](https://tools.ietf.org/html/rfc7807).
 
