@@ -12,7 +12,7 @@ module ProblemDetails
       end
 
       def config
-        @_config ||= Config.new
+        @config ||= Config.new
       end
     end
 

@@ -5,6 +5,7 @@ require 'rack/utils'
 
 # An object representing RFC 7807 Problem Details
 module ProblemDetails
+  # The class that implements a Problem Details JSON object described in RFC 7807.
   class Document
     attr_accessor :type, :title, :status, :detail, :instance
 

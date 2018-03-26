@@ -2,6 +2,7 @@
 
 module ProblemDetails
   module Rails
+    # A builder to build a hash that is passed to ActionController's render method.
     class RenderOptionBuilder
       # @param [Hash] content given as a value of :problem key of render method.
       # @param [Hash] options options of render method.
