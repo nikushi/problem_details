@@ -40,6 +40,9 @@ And then execute:
 require 'problem_details'
 
 ProblemDetails::Document.new(status: 404).to_json
+
+# Or status code symbol can be specified as well.
+ProblemDetails::Document.new(status: :not_found).to_json
 ```
 
 will produce:
