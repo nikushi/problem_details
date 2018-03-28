@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
+version = File.read(File.expand_path('VERSION', __dir__)).strip
+
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'problem_details/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'problem_details'
-  spec.version       = ProblemDetails::VERSION
+  spec.version       = version
   spec.authors       = ['Nobuhiro Nikushi']
   spec.email         = ['deneb.ge@gmail.com']
 
@@ -15,9 +16,14 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/nikushi/problem_details'
   spec.license       = 'MIT'
 
-  spec.files         = `git ls-files|grep -v rails`.split($OUTPUT_RECORD_SEPARATOR).reject do |f|
-    f.match(%r{^(test|spec|features)/})
-  end
+  spec.files         = Dir['lib/**/*.rb'] + %w[
+    CHANGELOG.md
+    LICENSE.txt
+    README.md
+    Rakefile
+    problem_details.gemspec
+    VERSION
+  ]
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'rack'
