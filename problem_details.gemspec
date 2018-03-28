@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
+version = File.read(File.expand_path('VERSION', __dir__)).strip
+
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'problem_details/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'problem_details'
-  spec.version       = ProblemDetails::VERSION
+  spec.version       = version
   spec.authors       = ['Nobuhiro Nikushi']
   spec.email         = ['deneb.ge@gmail.com']
 
