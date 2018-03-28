@@ -16,9 +16,14 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/nikushi/problem_details'
   spec.license       = 'MIT'
 
-  spec.files         = `git ls-files|grep -v rails`.split($OUTPUT_RECORD_SEPARATOR).reject do |f|
-    f.match(%r{^(test|spec|features)/})
-  end
+  spec.files         = Dir['lib/**/*.rb'] + %w[
+    CHANGELOG.md
+    LICENSE.txt
+    README.md
+    Rakefile
+    problem_details.gemspec
+    VERSION
+  ]
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'rack'
