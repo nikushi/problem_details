@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
+ENV['RACK_ENV'] = 'test'
 require 'bundler/setup'
+
+require 'sinatra/contrib'
 require 'sinatra-problem_details'
 
 RSpec.configure do |config|
@@ -13,4 +16,6 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.include Sinatra::TestHelpers
 end
