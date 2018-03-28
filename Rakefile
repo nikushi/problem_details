@@ -30,4 +30,21 @@ desc 'release'
 task release: ['problem_details:release', 'problem_details-rails:release']
 
 RSpec::Core::RakeTask.new(:spec)
-task default: :spec
+task default: 'spec:all'
+
+namespace :spec do
+  dirs = %w(
+    .
+    problem_details-rails
+  )
+
+  desc "Run all specs"
+  task :all do
+    dirs.each do |d|
+      Dir.chdir(d) do
+        sh 'bundle --quiet'
+        sh 'bundle exec rake spec'
+      end
+    end
+  end
+end
