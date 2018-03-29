@@ -54,7 +54,7 @@ desc 'build and install'
 task install: ['problem_details:install', 'problem_details-rails:install', 'sinatra-problem_details:build']
 
 desc 'release'
-task release: ['problem_details:release', 'problem_details-rails:release', 'sinatra-problem_details:build']
+task release: ['problem_details:release', 'problem_details-rails:release', 'sinatra-problem_details:release']
 
 RSpec::Core::RakeTask.new(:spec)
 task default: 'spec:all'
