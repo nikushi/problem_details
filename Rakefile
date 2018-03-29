@@ -55,8 +55,10 @@ namespace :spec do
   task :all do
     dirs.each do |d|
       Dir.chdir(d) do
-        sh 'bundle --quiet'
-        sh 'bundle exec rake spec'
+        Bundler.with_clean_env do
+          sh 'bundle --quiet'
+          sh 'bundle exec rake spec'
+        end
       end
     end
   end
