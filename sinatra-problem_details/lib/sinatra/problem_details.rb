@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'problem_details/version'
+
 require 'sinatra/base'
 require 'sinatra/json'
 require 'problem_details'
