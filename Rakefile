@@ -6,6 +6,23 @@ require 'rspec/core/rake_task'
 # For multiple gems
 # ref https://github.com/bkeepers/dotenv/blob/master/Rakefile
 
+# === helpers ===
+def source_version
+  @source_version ||= File.read(File.expand_path("../VERSION", __FILE__)).strip
+end
+
+# == release ====
+desc "Commits the version"
+task :commit_version do
+  sh <<-SH
+    gsed -i "s/.*VERSION.*/  VERSION = '#{source_version}'/" lib/problem_details/version.rb
+    gsed -i "s/.*VERSION.*/    VERSION = '#{source_version}'/" problem_details-rails/lib/problem_details/rails/version.rb
+    gsed -i "s/.*VERSION.*/    VERSION = '#{source_version}'/" sinatra-problem_details/lib/sinatra/problem_details/version.rb
+  SH
+
+  sh "git commit --allow-empty -a -m '#{source_version} release'"
+end
+
 namespace 'problem_details' do
   Bundler::GemHelper.install_tasks name: 'problem_details'
 end
@@ -29,8 +46,6 @@ namespace 'sinatra-problem_details' do
 
   SinatraProblemDetailsGemHelper.install_tasks dir: File.join(__dir__, 'sinatra-problem_details'), name: 'sinatra-problem_details'
 end
-
-
 
 desc 'build gem'
 task build: ['problem_details:build', 'problem_details-rails:build', 'sinatra-problem_details:build']
