@@ -5,7 +5,7 @@ ProblemDetails is an implementation of [RFC7807 Problem Details for HTTP APIs](h
 The RFC defines a "problem detail" as a way to inform errors to clients as machine readable form in a HTTP response
 to avoid the need to define new error response formats for HTTP APIs.
 
-This library also works with Rails, by the `problem` renderer that helps to respond with the problem detail form.
+This library also works with Rails and Sinatra, by the `problem` renderer that helps to respond with the problem detail form.
 
 Currently only JSON serialization is supported.
 
@@ -26,6 +26,12 @@ Or if you use with Rails, add below line instead.
 
 ```ruby
 gem 'problem_details-rails'
+```
+
+With Sinatra, add below line instead.
+
+```ruby
+gem 'sinatra-problem_details'
 ```
 
 And then execute:
@@ -106,7 +112,7 @@ will produce(note that `balance` and `accounts` are extention members):
 
 ### With Rails
 
-Once `render_problems-rails` gem is installed into a Rails system, a problem can be rendered with the problem detail form with `Content-Type: application/problem+json`.
+Once `problem_details-rails` gem is installed into a Rails system, a problem can be rendered with the problem detail form with `Content-Type: application/problem+json`.
 
 For example, respond with validation error messages:
 
@@ -142,6 +148,54 @@ Content-Type: application/problem+json; charset=utf-8
 }
 ```
 
+### With Sinatra
+
+Install `sinatra-problems_details` into a sinatra app, a problem is be rendered as well with `Content-Type: application/problem+json`.
+
+#### Classic Application
+
+```ruby
+require 'sinatra'
+require 'sinatra-problem_details'
+
+get '/' do
+  status 400
+  problem foo: 'bar'
+end
+```
+
+#### Modular Application
+
+```ruby
+require 'sinatra/base'
+require 'sinatra-problem_details'
+
+class MyApp < Sinatra::Base
+  register Sinatra::ProblemDetails
+
+  get '/' do
+    status 400
+    problem foo: 'bar'
+  end
+end
+```
+
+#### Response
+
+The sinatra apps defined in the previous sections will render:
+
+```
+HTTP/1.1 400 Bad Request
+Content-Type: application/problem+json
+
+{
+  "type": "about:blank",
+  "title": "Bad Request",
+  "status": 400,
+  "foo": "bar"
+  }
+}
+```
 
 ## Development
 
