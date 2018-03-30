@@ -30,16 +30,6 @@ RSpec.describe Sinatra::ProblemDetails do
     results_in 'status' => 404, 'title' => 'Not Found', 'type' => 'about:blank', 'foo' => [1, 'bar', nil]
   end
 
-  it "encodes objects with given symbol status" do
-    mock_app do
-      get('/') do
-        status :forbidden
-        problem :foo => [1, 'bar', nil]
-      end
-    end
-    results_in 'status' => 403, 'title' => 'Forbidden', 'type' => 'about:blank', 'foo' => [1, 'bar', nil]
-  end
-
   it "encodes objects with status and other properties including reserved ones in RFC" do
     mock_app do
       get('/') do
