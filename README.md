@@ -14,6 +14,12 @@ Currently only JSON serialization is supported.
 * Provides the class that implements a Problem Details JSON Object.
 * With Rails, automatically adds the renderer to respond with `Content-Type: application/problem+json` which works with `render` in controllers.
 
+## Supported Versions
+
+* Ruby 2.0.0, 2.1.x, 2.2.x, 2.3.x, 2.4.x, 2.5.x
+* Rails 4.x, 5.x
+* Sinatra >= 1.4
+
 ## Installation
 
 Add this line to your application's Gemfile:
