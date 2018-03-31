@@ -1,3 +1,7 @@
+## 0.2.1 / 2018-03-31
+
+* Clarify supported ruby/gem versions
+
 ## 0.2.0 / 2018-03-20
 
 ### Enhancements:
