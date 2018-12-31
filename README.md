@@ -16,7 +16,7 @@ Currently only JSON serialization is supported.
 
 ## Supported Versions
 
-* Ruby 2.0.0, 2.1.x, 2.2.x, 2.3.x, 2.4.x, 2.5.x
+* Ruby 2.3.x, 2.4.x, 2.5.x, 2.6.x
 * Rails 4.x, 5.x
 * Sinatra >= 1.4
 
