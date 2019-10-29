@@ -61,17 +61,18 @@ will produce:
 
 ```json
 {
-  "type": "about:blank",
   "title": "Not Found",
   "status": 404
 }
 ```
 
-As above, the value of `type` will be presented as `about:blank` by default if the value is ommited, also the value of `title` is filled automatically from the status code. These are described in [Predefined Problem Types](https://tools.ietf.org/html/rfc7807#section-4.2):
+As above, the value of `type` is implied to be `about:blank` by default if the value is ommited, also the value of `title` is filled automatically from the status code. These are described in [Predefined Problem Types](https://tools.ietf.org/html/rfc7807#section-4.2):
 
 > The "about:blank" URI, when used as a problem type, indicates that the problem has no additional semantics beyond that of the HTTP status code.
 
 > When "about:blank" is used, the title SHOULD be the same as the recommended HTTP status phrase for that code (e.g., "Not Found" for 404, and so on)
+
+> ..."about:blank" URI is the default value for that ["type"] member.  Consequently, any problem details object not carrying an explicit "type" member implicitly uses this URI.
 
 But you may also have the need to add some little hint, e.g. as a custom detail of the problem:
 
@@ -83,7 +84,6 @@ will produce:
 
 ```json
 {
-  "type": "about:blank",
   "title": "Service Unavailable",
   "status": 503,
   "detail": "Database not reachable"
@@ -143,7 +143,6 @@ HTTP/1.1 422 Unprocessable Entity
 Content-Type: application/problem+json; charset=utf-8
 
 {
-  "type": "about:blank",
   "title": "Unprocessable Entity",
   "status": 422,
   "errors": {
@@ -195,7 +194,6 @@ HTTP/1.1 400 Bad Request
 Content-Type: application/problem+json
 
 {
-  "type": "about:blank",
   "title": "Bad Request",
   "status": 400,
   "foo": "bar"

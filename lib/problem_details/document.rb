@@ -11,7 +11,7 @@ module ProblemDetails
 
     def initialize(params = {})
       params = params.dup
-      @type = params.delete(:type) || 'about:blank'
+      @type = params.delete(:type)
       @status = Rack::Utils.status_code(params.delete(:status)) if params.key?(:status)
       @title = params.delete(:title) || (@status ? ::Rack::Utils::HTTP_STATUS_CODES[@status] : nil)
       @detail = params.delete(:detail)
