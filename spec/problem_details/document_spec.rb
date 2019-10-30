@@ -13,7 +13,7 @@ RSpec.describe ProblemDetails::Document do
     end
 
     context 'without type' do
-      it { expect(subject.type).to eq 'about:blank' }
+      it { expect(subject.type).to eq nil }
     end
 
     context 'with title' do

@@ -17,7 +17,7 @@ RSpec.describe Sinatra::ProblemDetails do
 
   it "encodes objects with default status" do
     mock_app { get('/') { problem :foo => [1, 'bar', nil] } }
-    results_in 'status' => 200, 'title' => 'OK', 'type' => 'about:blank', 'foo' => [1, 'bar', nil]
+    results_in 'status' => 200, 'title' => 'OK', 'foo' => [1, 'bar', nil]
   end
 
   it "encodes objects with given status" do
@@ -27,7 +27,7 @@ RSpec.describe Sinatra::ProblemDetails do
         problem :foo => [1, 'bar', nil]
       end
     end
-    results_in 'status' => 404, 'title' => 'Not Found', 'type' => 'about:blank', 'foo' => [1, 'bar', nil]
+    results_in 'status' => 404, 'title' => 'Not Found', 'foo' => [1, 'bar', nil]
   end
 
   it "encodes objects with status and other properties including reserved ones in RFC" do
