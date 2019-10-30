@@ -1,3 +1,7 @@
+## 0.2.2 / 2019-10-30
+
+* Remove default about:blank type (#5) by @akrawchyk
+
 ## 0.2.1 / 2018-03-31
 
 * Clarify supported ruby/gem versions
