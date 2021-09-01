@@ -19,7 +19,7 @@ module ProblemDetails
       @extentions = params
     end
 
-    def to_h
+    def to_hash
       h = {}
       %i[type title status detail instance].each do |key|
         value = public_send(key)
@@ -27,9 +27,10 @@ module ProblemDetails
       end
       h.merge(@extentions)
     end
+    alias_method :to_h, :to_hash
 
     def to_json
-      to_h.to_json
+      to_hash.to_json
     end
   end
 end
