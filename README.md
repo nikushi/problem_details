@@ -200,7 +200,6 @@ Content-Type: application/problem+json
   "title": "Bad Request",
   "status": 400,
   "foo": "bar"
-  }
 }
 ```
 
