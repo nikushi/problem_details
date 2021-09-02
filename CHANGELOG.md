@@ -1,4 +1,4 @@
-## Unreleased / ???
+## 0.2.3 / 2021-09-03
 
 * Support the `#to_hash` implicit conversion protocol (#8) by @stevenharman
 
